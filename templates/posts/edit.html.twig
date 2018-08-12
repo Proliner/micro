@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Microblog | Bericht {{ post.titel }} aanpassen{% endblock %}
+
+{% block body %}
+    <h1>Bericht aanpassen</h1>
+
+    {{ include('posts/_form.html.twig', {'button_label': 'Aanpassen'}) }}
+
+    <a href="{{ path('posts_index') }}">Terug naar het overzicht</a>
+
+    {{ include('posts/_delete_form.html.twig') }}
+{% endblock %}

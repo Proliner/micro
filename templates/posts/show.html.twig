@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Microblog | Bericht: {{ post.title }}{% endblock %}
+
+{% block body %}
+    <h1>Bericht: {{ post.title }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ post.id }}</td>
+            </tr>
+            <tr>
+                <th>Titel</th>
+                <td>{{ post.title }}</td>
+            </tr>
+            <tr>
+                <th>Inhoud</th>
+                <td>{{ post.message }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('posts_index') }}">Terug naar het overzicht</a>
+
+    <a href="{{ path('posts_edit', {'id': post.id}) }}">Aanpassen</a>
+
+    {{ include('posts/_delete_form.html.twig') }}
+{% endblock %}

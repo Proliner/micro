@@ -1,0 +1,11 @@
+.container {
+    width: 700px;
+}
+
+.post-date {
+    font-size: 0.75em;
+}
+
+.jumbotron {
+    height: 100vh;
+}

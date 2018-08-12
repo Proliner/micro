@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Microblog | Berichten{% endblock %}
+
+{% block body %}
+
+
+    <div class="row mb-5">
+        <div class="col-lg-6">
+            <h1>Berichten</h1>
+        </div>
+        <div class="col-lg-6">
+            <div class="float-right">
+                <a class="btn btn-outline-primary" href="{{ path('posts_new') }}">Nieuw bericht</a>
+            </div>
+        </div>
+    </div>
+
+    {% for post in posts %}
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card border-light mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text text-secondary">{{ post.message }}</p>
+                    </div>
+                    <div class="card-footer text-muted d-flex align-items-center bd-highlight">
+                        <div class="bd-highlight">
+                            <a class="btn btn-sm" href="{{ path('posts_show', {'id': post.id}) }}">Bekijken</a>
+                            <a class="btn btn-sm" href="{{ path('posts_edit', {'id': post.id}) }}">Aanpassen</a>
+                        </div>
+
+                        <div class="ml-auto bd-highlight">
+                            <p class="post-date m-0 text-monospace ">{{ post.createdat.date|date("H:i — j M.")|lower }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    {% else %}
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">Geen resultaat</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

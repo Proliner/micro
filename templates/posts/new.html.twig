@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Microblog | Bericht aanmaken{% endblock %}
+
+{% block body %}
+    <h1>Nieuw bericht aanmaken</h1>
+
+    {{ include('posts/_form.html.twig') }}
+
+    <a href="{{ path('posts_index') }}">Terug naar het overzicht</a>
+{% endblock %}
