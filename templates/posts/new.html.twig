@@ -1,11 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Microblog | Bericht aanmaken{% endblock %}
+{% block title %}Microblog | Bericht toevoegen{% endblock %}
 
 {% block body %}
-    <h1>Nieuw bericht aanmaken</h1>
 
-    {{ include('posts/_form.html.twig') }}
+    <h1 class="mb-4">Nieuw bericht toevoegen</h1>
 
-    <a href="{{ path('posts_index') }}">Terug naar het overzicht</a>
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <div class="row">
+        <div class="col-lg-6">
+            <a href="{{ path('posts_index') }}">Annuleren</a>
+        </div>
+        <div class="col-lg-6">
+            <button type="submit" class="btn btn-success float-right">Bericht toevoegen</button>
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
 {% endblock %}

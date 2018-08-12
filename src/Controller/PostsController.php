@@ -28,18 +28,31 @@ class PostsController extends Controller
      */
     public function new(Request $request): Response
     {
+        //new instance Posts model
         $post = new Posts();
+        //building the form
         $form = $this->createForm(PostsType::class, $post);
+        //setting up the request
         $form->handleRequest($request);
 
+        // handle the submit
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //set timezone
+            date_default_timezone_set( 'Europe/Amsterdam' );
+            //set the created at date
+            $post->setCreatedAt(\DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:i:s")));
+
+            //save the post
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();
 
+            //return to the index
             return $this->redirectToRoute('posts_index');
         }
 
+        //return the view with post and form variables
         return $this->render('posts/new.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
@@ -79,7 +92,7 @@ class PostsController extends Controller
      */
     public function delete(Request $request, Posts $post): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->request->get('_token'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($post);
             $em->flush();
