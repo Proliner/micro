@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="ml-auto bd-highlight">
-                        <p class="post-date m-0 text-monospace ">{{ post.createdat.date|date("H:i — j M.")|lower }}</p>
+                        <p class="post-date m-0 text-monospace ">{{ post.createdat.date|date("H:i — j M. Y")|lower }}</p>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
     <div class="row">
         <div class="col-lg-6 d-flex align-items-center">
             <a href="{{ path('posts_index') }}">Terug naar het overzicht</a>
-        </div>
+        </div>§§
         <div class="col-lg-6">
             <div class="float-right">
                 {{ include('posts/_delete_form.html.twig') }}

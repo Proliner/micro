@@ -30,7 +30,8 @@
                         </div>
 
                         <div class="ml-auto bd-highlight">
-                            <p class="post-date m-0 text-monospace ">{{ post.createdat.date|date("H:i — j M.")|lower }}</p>
+                            {#<p class="post-date m-0 text-monospace ">{{ post.createdat.date|ago }}</p>#}
+                            <p class="post-date m-0 text-monospace ">{{ post.createdat|ago }}</p>
                         </div>
                     </div>
                 </div>

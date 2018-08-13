@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/posts")
+ * @Route("/")
  */
 class PostsController extends Controller
 {
@@ -25,7 +25,7 @@ class PostsController extends Controller
     }
 
     /**
-     * @Route("/new", name="posts_new", methods="GET|POST")
+     * @Route("post/new", name="posts_new", methods="GET|POST")
      */
     public function new(Request $request): Response
     {
@@ -38,11 +38,8 @@ class PostsController extends Controller
 
         // handle the submit
         if ($form->isSubmitted() && $form->isValid()) {
-
-            //set timezone
-            date_default_timezone_set('Europe/Amsterdam');
             //set the created at date
-            $post->setCreatedAt(\DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:i:s")));
+            $post->setCreatedAt(new \DateTime('now'));
 
             //save the post
             $em = $this->getDoctrine()->getManager();
@@ -64,7 +61,7 @@ class PostsController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="posts_show", methods="GET")
+     * @Route("post/{id}", name="posts_show", methods="GET")
      */
     public function show(Posts $post): Response
     {
@@ -72,7 +69,7 @@ class PostsController extends Controller
     }
 
     /**
-     * @Route("/{id}/edit", name="posts_edit", methods="GET|POST")
+     * @Route("post/{id}/edit", name="posts_edit", methods="GET|POST")
      */
     public function edit(Request $request, Posts $post): Response
     {
@@ -101,7 +98,7 @@ class PostsController extends Controller
     }
 
     /**
-     * @Route("/{id}", name="posts_delete", methods="DELETE")
+     * @Route("post/{id}", name="posts_delete", methods="DELETE")
      */
     public function delete(Request $request, Posts $post): Response
     {

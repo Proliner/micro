@@ -17,12 +17,12 @@ class PostsType extends AbstractType
             ->add('title', TextType::class, array(
               'label' => 'Titel',
               'required' => true,
-              'translation_domain' => 'titel'
+              'translation_domain' => false
             ))
             ->add('message', TextareaType::class, array(
                 'label' => 'Bericht',
                 'required' => true,
-                'translation_domain' => 'bericht'
+                'translation_domain' => false
             ))
         ;
     }
