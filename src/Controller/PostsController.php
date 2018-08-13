@@ -20,7 +20,10 @@ class PostsController extends Controller
      */
     public function index(PostsRepository $postsRepository): Response
     {
-        return $this->render('posts/index.html.twig', ['posts' => $postsRepository->findAll()]);
+        return $this->render('posts/index.html.twig', ['posts' => $postsRepository->findBy(
+            [],
+            ['created_at' => 'DESC']
+        )]);
     }
 
     /**
