@@ -52,7 +52,7 @@ class PostsController extends Controller
             $em->flush();
 
             //add flash message
-            $this->addFlash('success', 'Bericht is toegevoegd!');
+            $this->addFlash('success', 'Bericht is toegevoegd.');
 
             //return to the index
             return $this->redirectToRoute('posts_index');
@@ -84,7 +84,11 @@ class PostsController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('posts_edit', ['id' => $post->getId()]);
+            //add flash message
+            $this->addFlash('success', 'Bericht is aangepast.');
+
+            //back to the index
+            return $this->redirectToRoute('posts_index');
         }
 
         return $this->render('posts/edit.html.twig', [
@@ -98,12 +102,18 @@ class PostsController extends Controller
      */
     public function delete(Request $request, Posts $post): Response
     {
+        //check for the csrf token
         if ($this->isCsrfTokenValid('delete' . $post->getId(), $request->request->get('_token'))) {
+            //remove the post from the db
             $em = $this->getDoctrine()->getManager();
             $em->remove($post);
             $em->flush();
         }
 
+        //add flash message
+        $this->addFlash('success', 'Bericht is verwijderd.');
+
+        //When the post is deleted the user gets redirected to the index page
         return $this->redirectToRoute('posts_index');
     }
 }
