@@ -39,7 +39,7 @@ class PostsController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
 
             //set timezone
-            date_default_timezone_set( 'Europe/Amsterdam' );
+            date_default_timezone_set('Europe/Amsterdam');
             //set the created at date
             $post->setCreatedAt(\DateTime::createFromFormat("Y-m-d H:i:s", date("Y-m-d H:i:s")));
 
@@ -47,6 +47,9 @@ class PostsController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();
+
+            //add flash message
+            $this->addFlash('success', 'Bericht is toegevoegd!');
 
             //return to the index
             return $this->redirectToRoute('posts_index');
