@@ -20,10 +20,8 @@ class PostsController extends Controller
      */
     public function index(PostsRepository $postsRepository): Response
     {
-        return $this->render('posts/index.html.twig', ['posts' => $postsRepository->findBy(
-            [],
-            ['created_at' => 'DESC']
-        )]);
+        //return the index view with all the posts sorted by DESC
+        return $this->render('posts/index.html.twig', ['posts' => $postsRepository->findAllOrderedByDesc()]);
     }
 
     /**
@@ -78,10 +76,14 @@ class PostsController extends Controller
      */
     public function edit(Request $request, Posts $post): Response
     {
+        //create the form with the current post information
         $form = $this->createForm(PostsType::class, $post);
         $form->handleRequest($request);
 
+        //check of the form is submitted and if so check for the validation
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //make the changes in the db
             $this->getDoctrine()->getManager()->flush();
 
             //add flash message
@@ -91,6 +93,7 @@ class PostsController extends Controller
             return $this->redirectToRoute('posts_index');
         }
 
+        //render the view
         return $this->render('posts/edit.html.twig', [
             'post' => $post,
             'form' => $form->createView(),
